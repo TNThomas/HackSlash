@@ -94,6 +94,17 @@ namespace Unity.FPS.Gameplay
             return false;
         }
 
+        // this is me, ashton, attempting to add melee in the same way everything else has been done
+        public bool GetMeleeInputDown()
+        {
+            if (CanProcessInput())
+            {
+                return Input.GetButtonDown(GameConstants.k_ButtonNameMelee);
+            }
+
+            return false;
+        }
+
         public bool GetFireInputDown()
         {
             return GetFireInputHeld() && !m_FireInputWasHeld;
