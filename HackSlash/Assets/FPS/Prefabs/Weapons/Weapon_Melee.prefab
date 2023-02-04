@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponName: Melee
-  WeaponIcon: {fileID: 21300000, guid: cab1398a10b307b44b0ffeb0eef23254, type: 3}
+  WeaponIcon: {fileID: 21300000, guid: 2883dea87a05ddc4489db71bdbf6a412, type: 3}
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 21300000, guid: 14aa1febcf423c84997aa10d7ff64d17, type: 3}
     CrosshairSize: 100
@@ -65,7 +65,7 @@ MonoBehaviour:
   ShootType: 0
   ProjectilePrefab: {fileID: 5542020336735652036, guid: 85d0bcb0883d2274084af9e2d4078c56,
     type: 3}
-  DelayBetweenShots: 0.5
+  DelayBetweenShots: 0.05
   BulletSpreadAngle: 0
   BulletsPerShot: 1
   RecoilForce: 1
@@ -78,9 +78,9 @@ MonoBehaviour:
   EjectionPort: {fileID: 0}
   ShellCasingEjectionForce: 2
   ShellPoolSize: 1
-  AmmoReloadRate: 1
-  AmmoReloadDelay: 2
-  MaxAmmo: 4
+  AmmoReloadRate: 0.25
+  AmmoReloadDelay: 0.5
+  MaxAmmo: 10
   AutomaticReleaseOnCharged: 0
   MaxChargeDuration: 1.46
   AmmoUsedOnStartCharge: 1
