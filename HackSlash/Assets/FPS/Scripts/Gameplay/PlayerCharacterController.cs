@@ -1,4 +1,5 @@
-﻿using Unity.FPS.Game;
+﻿using Codice.CM.Common;
+using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -43,6 +44,14 @@ namespace Unity.FPS.Gameplay
 
         [Tooltip("Height at which the player dies instantly when falling off the map")]
         public float KillHeight = -50f;
+
+        [Header("Slide")]
+
+        [Tooltip("The speed at which the player starts sliding - relative to their walking movement - likely to be influenced by slideDuration")]
+        public float SlideStartSpeed = 1.7f;
+
+        [Tooltip("The time during which the player will be sliding - in seconds?")]
+        public float SlideMazDuration = 1;
 
         [Header("Rotation")] [Tooltip("Rotation speed for moving the camera")]
         public float RotationSpeed = 200f;
@@ -103,6 +112,9 @@ namespace Unity.FPS.Gameplay
         public bool HasJumpedThisFrame { get; private set; }
         public bool IsDead { get; private set; }
         public bool IsCrouching { get; private set; }
+        public bool IsSprinting { get; private set; }
+        [SerializeField] public bool IsSliding{ get; private set; }
+        public AnimationCurve SlideSpeedCurve { get; private set; }
 
         public float RotationMultiplier
         {
@@ -132,6 +144,7 @@ namespace Unity.FPS.Gameplay
 
         const float k_JumpGroundingPreventionTime = 0.2f;
         const float k_GroundCheckDistanceInAir = 0.07f;
+
 
         void Awake()
         {
@@ -287,20 +300,21 @@ namespace Unity.FPS.Gameplay
             }
 
             // character movement handling
-            bool isSprinting = m_InputHandler.GetSprintInputHeld();
+            IsSprinting = m_InputHandler.GetSprintInputHeld();
             {
-                if (isSprinting)
+                if (IsSprinting && !IsSliding)
                 {
-                    isSprinting = SetCrouchingState(false, false);
+                    IsSprinting = SetCrouchingState(false, false);
                 }
 
-                float speedModifier = isSprinting ? SprintSpeedModifier : 1f;
+
+                float speedModifier = IsSprinting ? SprintSpeedModifier : 1f;
 
                 // converts move input to a worldspace vector based on our character's transform orientation
                 Vector3 worldspaceMoveInput = transform.TransformVector(m_InputHandler.GetMoveInput());
 
-                // handle grounded movement
-                if (IsGrounded)
+                // handle default grounded movement (default meaning not sliding)
+                if (IsGrounded && !IsSliding)
                 {
                     // calculate the desired velocity from inputs, max speed, and current slope
                     Vector3 targetVelocity = worldspaceMoveInput * MaxSpeedOnGround * speedModifier;
@@ -338,10 +352,10 @@ namespace Unity.FPS.Gameplay
                             m_GroundNormal = Vector3.up;
                         }
                     }
-
+                   
                     // footsteps sound
                     float chosenFootstepSfxFrequency =
-                        (isSprinting ? FootstepSfxFrequencyWhileSprinting : FootstepSfxFrequency);
+                        (IsSprinting ? FootstepSfxFrequencyWhileSprinting : FootstepSfxFrequency);
                     if (m_FootstepDistanceCounter >= 1f / chosenFootstepSfxFrequency)
                     {
                         m_FootstepDistanceCounter = 0f;
@@ -351,6 +365,17 @@ namespace Unity.FPS.Gameplay
                     // keep track of distance traveled for footsteps sound
                     m_FootstepDistanceCounter += CharacterVelocity.magnitude * Time.deltaTime;
                 }
+                //handle sliding movment
+                if(IsGrounded && IsSliding)
+                {
+                    speedModifier = SlideStartSpeed; //probably gonna adjust this relative to slideCurrDur
+
+                    Vector3 targetVelocity = worldspaceMoveInput * MaxSpeedOnGround * speedModifier;
+
+                    CharacterVelocity = targetVelocity; //I don't *think* I want to do this as linear interpolation, but I'm not positive
+
+                }
+
                 // handle air movement
                 else
                 {
@@ -441,9 +466,15 @@ namespace Unity.FPS.Gameplay
             if (crouched)
             {
                 m_TargetCharacterHeight = CapsuleHeightCrouching;
+                if (IsSprinting)
+                {
+                    IsSliding = true;
+                    Debug.Log("slide");
+                }
             }
             else
             {
+                IsSliding = false;
                 // Detect obstructions
                 if (!ignoreObstructions)
                 {
