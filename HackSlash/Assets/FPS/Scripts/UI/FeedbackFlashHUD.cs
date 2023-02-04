@@ -7,7 +7,7 @@ namespace Unity.FPS.UI
 {
     public class FeedbackFlashHUD : MonoBehaviour
     {
-        [Header("References")] [Tooltip("Image component of the flash")]
+        [Header("References")][Tooltip("Image component of the flash")]
         public Image FlashImage;
 
         [Tooltip("CanvasGroup to fade the damage flash, used when recieving damage end healing")]
@@ -16,7 +16,7 @@ namespace Unity.FPS.UI
         [Tooltip("CanvasGroup to fade the critical health vignette")]
         public CanvasGroup VignetteCanvasGroup;
 
-        [Header("Damage")] [Tooltip("Color of the damage flash")]
+        [Header("Damage")][Tooltip("Color of the damage flash")]
         public Color DamageFlashColor;
 
         [Tooltip("Duration of the damage flash")]
@@ -25,13 +25,13 @@ namespace Unity.FPS.UI
         [Tooltip("Max alpha of the damage flash")]
         public float DamageFlashMaxAlpha = 1f;
 
-        [Header("Critical health")] [Tooltip("Max alpha of the critical vignette")]
+        [Header("Critical health")][Tooltip("Max alpha of the critical vignette")]
         public float CriticaHealthVignetteMaxAlpha = .8f;
 
         [Tooltip("Frequency at which the vignette will pulse when at critical health")]
         public float PulsatingVignetteFrequency = 4f;
 
-        [Header("Heal")] [Tooltip("Color of the heal flash")]
+        [Header("Heal")][Tooltip("Color of the heal flash")]
         public Color HealFlashColor;
 
         [Tooltip("Duration of the heal flash")]
@@ -111,8 +111,11 @@ namespace Unity.FPS.UI
 
         void OnTakeDamage(float dmg, GameObject damageSource)
         {
-            ResetFlash();
-            FlashImage.color = DamageFlashColor;
+            if(damageSource!=null)
+            { 
+                ResetFlash();
+                FlashImage.color = DamageFlashColor;
+            }
         }
 
         void OnHealed(float amount)
