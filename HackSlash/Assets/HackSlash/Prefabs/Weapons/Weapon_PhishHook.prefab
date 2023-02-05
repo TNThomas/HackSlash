@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   WeaponName: Phish Hook
-  WeaponIcon: {fileID: 21300000, guid: 2883dea87a05ddc4489db71bdbf6a412, type: 3}
+  WeaponIcon: {fileID: 21300000, guid: f43747aeceb078644b396deecdb8b2ce, type: 3}
   CrosshairDataDefault:
     CrosshairSprite: {fileID: 21300000, guid: 2962952d6e5ae7342a298d45a3945069, type: 3}
     CrosshairSize: 40
