@@ -9,10 +9,11 @@ public class DoubleJump : MonoBehaviour
     [Tooltip("Force applied upward when Double jumping")]
     public float DoubleJumpForce = 9f;
 
-    bool m_CanDoublejump;
+    int numAirJumpsSinceLastGrounded = 0;
+    int maxAirJumps = 1;
+
     PlayerCharacterController m_PlayerCharacterController;
     PlayerInputHandler m_InputHandler;
-    //float m_LastTimeOfUse;
     public bool IsPlayergrounded() => m_PlayerCharacterController.IsGrounded;
 
     // Start is called before the first frame update
@@ -32,11 +33,11 @@ public class DoubleJump : MonoBehaviour
         // Double Jump only if not grounded and jump has been pressed again once in-air
         if (IsPlayergrounded())
         {
-            //m_CanDoublejump = false;
+            numAirJumpsSinceLastGrounded = 0;
         }
-        else if (!m_PlayerCharacterController.HasJumpedThisFrame && m_InputHandler.GetJumpInputDown())
+        else if (!m_PlayerCharacterController.HasJumpedThisFrame && m_InputHandler.GetJumpInputDown() && numAirJumpsSinceLastGrounded < maxAirJumps)
         {
-            //m_CanDoublejump = true;
+            numAirJumpsSinceLastGrounded += 1;
             // apply the acceleration to character's velocity
             m_PlayerCharacterController.CharacterVelocity += Vector3.up * DoubleJumpForce;
         }

@@ -101,8 +101,6 @@ namespace Unity.FPS.Gameplay
         // adding sliding friction amount and minimum sliding speed - ashton
         [Tooltip("the sliding speed curve")]
         public AnimationCurve SlideCurve;
-        // min slide speed should be close to  MaxSpeedOnGround* MaxSpeedCrouchedRatio;
-        public float MinSlideSpeed = 4f;
 
         public UnityAction<bool> OnStanceChanged;
 
@@ -117,7 +115,7 @@ namespace Unity.FPS.Gameplay
 
         public bool isSprinting { get; private set; }
 
-        public float SlideTime;
+        private float SlideTime;
 
         // im adding a double jump now - ashton
 

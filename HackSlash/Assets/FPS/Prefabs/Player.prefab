@@ -462,12 +462,46 @@ MonoBehaviour:
   FallDamageAtMaxSpeed: 30
   SlideCurve:
     serializedVersion: 2
-    m_Curve: []
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.977
+      inSlope: 0.7473121
+      outSlope: 0.7473121
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.186
+      value: 1.116
+      inSlope: -0.042668637
+      outSlope: -0.042668637
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.26801288
+    - serializedVersion: 3
+      time: 0.33526486
+      value: 1.1122186
+      inSlope: -0.082724445
+      outSlope: -0.082724445
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.7315248
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -0.0149648115
+      outSlope: -0.0149648115
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.28896338
+      outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  MinSlideSpeed: 4
-  SlideTime: 0
 --- !u!114 &1360575517897679518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -792,7 +826,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerCamera: {fileID: 8303093099919959869}
   DashSpeed: 50
-  DashTime: 0.2
+  dashTime: 0.2
+  dashCooldown: 1.5
+  dashStartTime: 0
 --- !u!114 &7871747636256407681
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,11 +11,21 @@ public class Dash : MonoBehaviour
     [Tooltip("Speed when Dashing")]
     public float DashSpeed = 15f;
     [Tooltip("time the dash lasts for in seconds")]
-    public float DashTime = 0.9f;
+    public float dashTime = 0.9f;
+
+    public float dashCooldown = 0.45f;
+    public float dashStartTime = 0f;
+
+    int numDashesSinceLastGrounded = 0;
+    int maxNumAirDashes = 0;
+
+    bool isDashing = false;
+
     PlayerInputHandler m_InputHandler;
     PlayerCharacterController m_PlayerCharacterController;
     CharacterController m_Controller;
 
+    public bool IsPlayergrounded() => m_PlayerCharacterController.IsGrounded;
 
     // Start is called before the first frame update
     void Start()
@@ -31,30 +41,38 @@ public class Dash : MonoBehaviour
         m_Controller = GetComponent<CharacterController>();
         DebugUtility.HandleErrorIfNullGetComponent<CharacterController, Dash>(m_Controller,
             this, gameObject);
-
     }
 
     // Update is called once per frame
     void Update()
     {
-         //m_InputHandler.GetDashInputDown();
-        if (m_InputHandler.GetDashInputDown())
+        // Double Jump only if not grounded and jump has been pressed again once in-air
+        if (IsPlayergrounded())
         {
-            //Debug.Log("DASH" + PlayerCamera.transform.forward +"  "+PlayerCamera.transform.forward * DashDistance);
-            //m_Controller.Move(PlayerCamera.transform.forward * DashDistance);
+            numDashesSinceLastGrounded = 0;
+        }
+
+        if (m_InputHandler.GetDashInputDown() && !isDashing && numDashesSinceLastGrounded <= maxNumAirDashes && Time.time >= dashStartTime + dashCooldown)
+        {
+            Debug.Log("DASH");
             StartCoroutine(Dashing());
-
-
         }
     }
 
     IEnumerator Dashing()
     {
-        float Start = Time.time;
-        while (Time.time-Start < DashTime) {
-            Debug.Log(Time.time - Start);
+        dashStartTime = Time.time;
+
+        numDashesSinceLastGrounded += 1;
+
+        isDashing = true;
+
+        float startTime = Time.time;
+        while (Time.time - startTime < dashTime) {
             m_Controller.Move(PlayerCamera.transform.forward * DashSpeed * Time.deltaTime);
             yield return null;
         }
+
+        isDashing = false;
     }
 }
