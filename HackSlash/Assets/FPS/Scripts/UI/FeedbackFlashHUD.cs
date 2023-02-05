@@ -72,7 +72,7 @@ namespace Unity.FPS.UI
                     (1 - (m_PlayerHealth.CurrentHealth / m_PlayerHealth.MaxHealth /
                           m_PlayerHealth.CriticalHealthRatio)) * CriticaHealthVignetteMaxAlpha;
 
-                if (m_GameFlowManager.GameIsEnding)
+                if (m_GameFlowManager.GameIsEnding || m_GameFlowManager.GameIsStarting)
                     VignetteCanvasGroup.alpha = vignetteAlpha;
                 else
                     VignetteCanvasGroup.alpha =

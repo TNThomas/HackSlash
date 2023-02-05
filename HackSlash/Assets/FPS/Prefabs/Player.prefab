@@ -431,7 +431,7 @@ MonoBehaviour:
   GravityDownForce: 20
   GroundCheckLayers:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 65
   GroundCheckDistance: 1
   MaxSpeedOnGround: 13
   MovementSharpnessOnGround: 15
@@ -868,7 +868,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 2871
+    m_Bits: 2935
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0

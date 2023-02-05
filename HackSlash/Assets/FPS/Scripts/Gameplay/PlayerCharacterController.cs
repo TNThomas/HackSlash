@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Runtime.CompilerServices;
 using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Events;
@@ -97,12 +97,6 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Damage recieved when falling at the maximum speed")]
         public float FallDamageAtMaxSpeed = 50f;
 
-        // adding sliding friction amount and minimum sliding speed - ashton
-        [Tooltip("the sliding speed curve")]
-        public AnimationCurve SlideCurve;
-        // min slide speed should be close to  MaxSpeedOnGround* MaxSpeedCrouchedRatio;
-        public float MinSlideSpeed = 4f;
-
         public UnityAction<bool> OnStanceChanged;
 
         public Vector3 CharacterVelocity { get; set; }
@@ -111,12 +105,6 @@ namespace Unity.FPS.Gameplay
         public bool IsDead { get; private set; }
         public bool IsCrouching { get; private set; }
 
-        // im adding sliding, wheeee!!! - ashton
-        public bool IsSliding { get; private set; }
-
-        public bool isSprinting { get; private set; }
-
-        public float SlideTime;
 
         public float RotationMultiplier
         {
@@ -137,6 +125,7 @@ namespace Unity.FPS.Gameplay
         PlayerWeaponsManager m_WeaponsManager;
         Actor m_Actor;
         Vector3 m_GroundNormal;
+        int m_GroundLayer;
         Vector3 m_CharacterVelocity;
         Vector3 m_LatestImpactSpeed;
         float m_LastTimeJumped = 0f;
@@ -214,13 +203,18 @@ namespace Unity.FPS.Gameplay
                 }
                 else
                 {
-                    // land SFX
-                    AudioSource.PlayOneShot(LandSfx);
+                    // Don't play grounding sounds on an elevator
+                    if(m_GroundLayer != LayerMask.NameToLayer("Elevator"))
+                    {
+                        Debug.Log($"GL: {m_GroundLayer}, {LayerMask.LayerToName(m_GroundLayer)}");
+
+                        // land SFX
+                        AudioSource.PlayOneShot(LandSfx);
+                    }
                 }
             }
 
-            // crouching 
-            // also handle sliding
+            // crouching
             if (m_InputHandler.GetCrouchInputDown())
             {
                 SetCrouchingState(!IsCrouching, false);
@@ -244,8 +238,7 @@ namespace Unity.FPS.Gameplay
         void GroundCheck()
         {
             // Make sure that the ground check distance while already in air is very small, to prevent suddenly snapping to ground
-            float chosenGroundCheckDistance =
-                IsGrounded ? (m_Controller.skinWidth + GroundCheckDistance) : k_GroundCheckDistanceInAir;
+            float chosenGroundCheckDistance = IsGrounded ? (m_Controller.skinWidth + GroundCheckDistance) : k_GroundCheckDistanceInAir;
 
             // reset values before the ground check
             IsGrounded = false;
@@ -261,6 +254,9 @@ namespace Unity.FPS.Gameplay
                 {
                     // storing the upward direction for the surface found
                     m_GroundNormal = hit.normal;
+
+                    // Store the layer for use in fixing the elevator audio bug
+                    m_GroundLayer =  hit.transform.gameObject.layer;
 
                     // Only consider this a valid ground hit if the ground normal goes in the same direction as the character up
                     // and if the slope angle is lower than the character controller's limit
@@ -301,24 +297,12 @@ namespace Unity.FPS.Gameplay
                 PlayerCamera.transform.localEulerAngles = new Vector3(m_CameraVerticalAngle, 0, 0);
             }
 
-
-
-
             // character movement handling
-            // i neeeed to adjust this to add sliding - ashton
-            isSprinting = m_InputHandler.GetSprintInputHeld();
+            bool isSprinting = m_InputHandler.GetSprintInputHeld();
             {
-                // this needs to check if we are not sliding
                 if (isSprinting)
                 {
-                    //Debug.Log("sliding " + IsSliding);
-                    if (!IsSliding) { 
-                        isSprinting = SetCrouchingState(false, false);
-                    }
-                }
-                else
-                {
-                    IsSliding = false;
+                    isSprinting = SetCrouchingState(false, false);
                 }
 
                 float speedModifier = isSprinting ? SprintSpeedModifier : 1f;
@@ -331,30 +315,9 @@ namespace Unity.FPS.Gameplay
                 {
                     // calculate the desired velocity from inputs, max speed, and current slope
                     Vector3 targetVelocity = worldspaceMoveInput * MaxSpeedOnGround * speedModifier;
-
                     // reduce speed if crouching by crouch speed ratio
                     if (IsCrouching)
-                    {
-                        if (IsSliding) {
-                            // if you are sliding ignore all velocity inputs and just keep what velocity you have but subtract friction from the x and z
-                            targetVelocity = new Vector3(CharacterVelocity.x*SlideCurve.Evaluate(Time.time-SlideTime),0, CharacterVelocity.z*SlideCurve.Evaluate(Time.time - SlideTime)); //- new Vector3(Math.Sign(CharacterVelocity.x)*SlideFriction,0, Math.Sign(CharacterVelocity.y)*SlideFriction);
-                            // if the velocity would be slower than the minimum sliding speed stop sliding
-
-                                // change this for only walls
-                       //     if (Math.Abs(CharacterVelocity.x) < MinSlideSpeed && Math.Abs(CharacterVelocity.z) < MinSlideSpeed)
-                         //   {
-                          //      IsSliding = false ;
-                          //      Debug.Log("sliding stopped due to insufficent speed");
-                        //    }
-
-                        }
-                        else
-                        {
-
-                            targetVelocity *= MaxSpeedCrouchedRatio;
-                        }
-                    }
-
+                        targetVelocity *= MaxSpeedCrouchedRatio;
                     targetVelocity = GetDirectionReorientedOnSlope(targetVelocity.normalized, m_GroundNormal) *
                                      targetVelocity.magnitude;
 
@@ -486,26 +449,12 @@ namespace Unity.FPS.Gameplay
         bool SetCrouchingState(bool crouched, bool ignoreObstructions)
         {
             // set appropriate heights
-            //if crouched is true, crouch, otherwise see if you can stand up
             if (crouched)
             {
                 m_TargetCharacterHeight = CapsuleHeightCrouching;
-
-                // if you are sprinting while you crouch you should slide
-                if (isSprinting)
-                {
-                    IsSliding = crouched;
-                    SlideTime = Time.time;
-                }
-                else
-                {
-                    IsSliding = !crouched;
-                }
             }
-            else //keep the stand up code mostly the same 
+            else
             {
-                //stop sliding, even if you dont uncrouch you should stop sliding
-                IsSliding = crouched;
                 // Detect obstructions
                 if (!ignoreObstructions)
                 {
