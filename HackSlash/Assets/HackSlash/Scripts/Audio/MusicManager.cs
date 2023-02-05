@@ -38,10 +38,19 @@ public class MusicManager : MonoBehaviour
     private void Start()
     {
         m_ActorsManager = FindObjectOfType<ActorsManager>();
-        DebugUtility.HandleErrorIfNullFindObject<ActorsManager, MusicManager>(m_ActorsManager, this);
+        //DebugUtility.HandleErrorIfNullFindObject<ActorsManager, MusicManager>(m_ActorsManager, this);
 
-        m_PlayerHealth = m_ActorsManager.Player.GetComponent<Health>();
-        DebugUtility.HandleErrorIfNullGetComponent<Health, MusicManager>(m_PlayerHealth, this, m_ActorsManager.Player);
+        if(m_ActorsManager != null)
+        {
+            m_PlayerHealth = m_ActorsManager.Player.GetComponent<Health>();
+            //DebugUtility.HandleErrorIfNullGetComponent<Health, MusicManager>(m_PlayerHealth, this, m_ActorsManager.Player);
+
+            if (m_PlayerHealth != null)
+            {
+                m_PlayerHealth.OnDamaged += BlendBMGEncapsulated;
+                m_PlayerHealth.OnHealed += BlendBMGEncapsulated;
+            }
+        }
 
         // Set audio clips
         m_CalmAudioSource.clip = calmTrack;
@@ -50,9 +59,6 @@ public class MusicManager : MonoBehaviour
         // Play tracks
         m_CalmAudioSource.Play();
         m_PanicAudioSource.Play();
-
-        m_PlayerHealth.OnDamaged += BlendBMGEncapsulated;
-        m_PlayerHealth.OnHealed += BlendBMGEncapsulated;
 
         //playerHealth.OnDamaged += new(() => BlendBGM(playerHealth.CurrentHealth, playerHealth.MaxHealth));
         //playerHealth.OnHealed += new(() => BlendBGM(playerHealth.CurrentHealth, playerHealth.MaxHealth));
