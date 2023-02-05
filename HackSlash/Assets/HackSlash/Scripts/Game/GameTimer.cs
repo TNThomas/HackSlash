@@ -2,7 +2,6 @@ using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.FPS.Game;
-using UnityEditor.ShaderGraph.Internal;
 using UnityEngine;
 
 public class GameTimer : MonoBehaviour
