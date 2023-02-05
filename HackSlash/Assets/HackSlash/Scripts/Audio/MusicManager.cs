@@ -64,20 +64,20 @@ public class MusicManager : MonoBehaviour
         //playerHealth.OnHealed += new(() => BlendBGM(playerHealth.CurrentHealth, playerHealth.MaxHealth));
     }
 
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            Debug.Log("MUSIC TRANSITION TO PANIC");
-            TransitionToPanic();
-        }
+    //private void Update()
+    //{
+    //    if(Input.GetKeyDown(KeyCode.I))
+    //    {
+    //        Debug.Log("MUSIC TRANSITION TO PANIC");
+    //        TransitionToPanic();
+    //    }
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            Debug.Log("MUSIC TRANSITION TO CALM");
-            TransitionToCalm();
-        }
-    }
+    //    if (Input.GetKeyDown(KeyCode.O))
+    //    {
+    //        Debug.Log("MUSIC TRANSITION TO CALM");
+    //        TransitionToCalm();
+    //    }
+    //}
 
     //Lmao bad Gamejam code is bad
     void BlendBMGEncapsulated(float amount, GameObject source) => BlendBMGEncapsulated(amount);
