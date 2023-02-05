@@ -103,7 +103,7 @@ namespace Unity.FPS.Game
                 m_SceneToLoad = currentLevelTransitionData.nextScene;
                 m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay + DelayBeforeFadeToBlack;
 
-                // play a sound on win
+                // play a sound on load
                 var audioSource = gameObject.AddComponent<AudioSource>();
                 audioSource.clip = VictorySound;
                 audioSource.playOnAwake = false;
