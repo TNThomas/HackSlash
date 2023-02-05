@@ -12,6 +12,8 @@ namespace Unity.FPS.UI
         [Tooltip("CanvasGroup to fade the ammo UI")]
         public CanvasGroup CanvasGroup;
 
+        [Tooltip("Image for the weapon icon")] public TextMeshProUGUI WeaponName;
+
         [Tooltip("Image for the weapon icon")] public Image WeaponImage;
 
         [Tooltip("Image component for the background")]
@@ -65,6 +67,7 @@ namespace Unity.FPS.UI
         {
             m_Weapon = weapon;
             WeaponCounterIndex = weaponIndex;
+            WeaponName.text = weapon.WeaponName;
             WeaponImage.sprite = weapon.WeaponIcon;
             if (!weapon.HasPhysicalBullets)
                 BulletCounter.transform.parent.gameObject.SetActive(false);
