@@ -9,11 +9,7 @@ public class CheckHit : MonoBehaviour
 
     // Start is called before the first frame update
     [SerializeField]
-    float DamageAmount = 1;
-    void Start()
-    {
-        
-    }
+    float DamageAmount = 0.25f;
 
     // Update is called once per frame
     void Update()
@@ -21,9 +17,9 @@ public class CheckHit : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.gameObject.tag== "Player")
+        if(other.gameObject.CompareTag("Player"))
         {
             other.GetComponent<Damageable>().InflictDamage(DamageAmount, true , gameObject);
         }

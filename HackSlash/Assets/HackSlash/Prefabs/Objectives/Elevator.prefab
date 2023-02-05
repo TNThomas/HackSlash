@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 910771337893952019}
   - component: {fileID: 7886021112316619195}
   - component: {fileID: 7188866788534436872}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ElevatorCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1865,7 +1865,7 @@ GameObject:
   - component: {fileID: 3666005463124189913}
   - component: {fileID: 6747642523369975999}
   - component: {fileID: 7835546133816945301}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: DoorCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2618,6 +2618,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ElevatorDoor
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 15b1a5e70d926ac4a9280c9ec7f081d0,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15b1a5e70d926ac4a9280c9ec7f081d0, type: 3}
 --- !u!4 &1536969618819438333 stripped
@@ -2697,6 +2702,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Elevator
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 4e0463111ee2f8f40911ef54f03355cd,
+        type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 4e0463111ee2f8f40911ef54f03355cd,
         type: 3}

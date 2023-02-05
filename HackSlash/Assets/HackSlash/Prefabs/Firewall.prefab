@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4951484462626893948}
   - component: {fileID: 4951484462626893949}
   m_Layer: 0
-  m_Name: Hazard
+  m_Name: Firewall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -89,7 +89,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 21404399205216556, guid: ba62bccd3bc0142bc9a0bc1addeaadce, type: 2}
+  - {fileID: 2100000, guid: 8add8f36e5a62564a95189776cf3a6ab, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

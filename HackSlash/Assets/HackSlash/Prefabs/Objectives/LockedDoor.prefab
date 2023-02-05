@@ -358,13 +358,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09cddce463e75964bb886e9fac3230a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemies:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  enemies: []
   animator: {fileID: 556869108781177960}
 --- !u!95 &556869108781177960
 Animator:
@@ -409,8 +403,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 556869110245748979}
-  m_LocalRotation: {x: 0, y: -0, z: -0.0023462523, w: 0.99999726}
-  m_LocalPosition: {x: 218.45, y: 19.08, z: 5.86}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

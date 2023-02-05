@@ -10,7 +10,7 @@ public class Elevator : MonoBehaviour
     [Tooltip("Where should the elevator move to?")]
     [SerializeField] private float defaultYTarget = 0f;
     [Tooltip("What speed should the elevator move at?")]
-    [SerializeField] private float defaultSpeed = 1f;
+    [SerializeField] private float speed = 1f;
     [Tooltip("Should the elevator begin moving on scene load?")]
     [SerializeField] private bool autoStart = false;
     [Tooltip("Should the elevator begin open or closed?")]
@@ -42,7 +42,7 @@ public class Elevator : MonoBehaviour
         if(autoStart)
         {
             //Move the elevator upwards towards goal position
-            StartMoveToGoal(defaultYTarget, speed: defaultSpeed);
+            StartMoveToGoal(defaultYTarget);
         }
     }
 
@@ -52,7 +52,7 @@ public class Elevator : MonoBehaviour
         {
             CloseDoor();
 
-            StartMoveToGoal(defaultYTarget, 0.5f, speed: defaultSpeed);
+            StartMoveToGoal(defaultYTarget, 0.5f);
         }
     }
 
@@ -74,15 +74,15 @@ public class Elevator : MonoBehaviour
         }
     }
 
-    public void StartMoveToGoal(float goalYPosition, float moveDelay = 0f, float speed = 1f)
+    public void StartMoveToGoal(float goalYPosition, float moveDelay = 0f)
     {
-        StartCoroutine(MoveTowardsGoal(goalYPosition, moveDelay, speed));
+        StartCoroutine(MoveTowardsGoal(goalYPosition, moveDelay));
     }
 
-    IEnumerator MoveTowardsGoal(float goalYPosition, float moveDelay = 0f, float speed = 1f)
+    IEnumerator MoveTowardsGoal(float goalYPosition, float moveDelay = 0f)
     {
         // Find out direction to move
-        float direction = Mathf.Sign(goalYPosition - transform.position.y);
+        float direction = Mathf.Sign(goalYPosition - transform.localPosition.y);
 
         // Delay if there is one
         float count = 0f;
@@ -93,15 +93,15 @@ public class Elevator : MonoBehaviour
         }
 
         // Move towards goal while we haven't passed it
-        while (Mathf.Sign(goalYPosition - transform.position.y) == direction)
+        while (Mathf.Sign(goalYPosition - transform.localPosition.y) == direction)
         {
-            transform.position += Vector3.up * Time.deltaTime * speed * direction;
+            transform.localPosition += Vector3.up * Time.deltaTime * speed * direction;
 
             yield return null;
         }
 
         // Snap to goal height
-        transform.position = new Vector3(transform.position.x, goalYPosition, transform.position.z);
+        transform.localPosition = new Vector3(transform.localPosition.x, goalYPosition, transform.localPosition.z);
 
         // Open the door
         OpenDoor();

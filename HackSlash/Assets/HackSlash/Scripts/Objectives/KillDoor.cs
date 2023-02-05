@@ -6,28 +6,23 @@ using Unity.FPS.Game;
 public class KillDoor : MonoBehaviour
 {
 
-    public Health[] enemies;
+    public Health[] enemyHealth;
     private float EnemiesKilled = 0;
     public Animator animator;
-    // Start is called before the first frame update
+
     void Start()
     {
-        foreach(Health h in enemies)
+        foreach(Health h in enemyHealth)
         {
             h.OnDie += Open;
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void Open()
     {
         EnemiesKilled++;
-        if (EnemiesKilled >= enemies.Length)
+
+        if (EnemiesKilled >= enemyHealth.Length)
         {
             Debug.Log("ill open");
             animator.SetTrigger("Open");
