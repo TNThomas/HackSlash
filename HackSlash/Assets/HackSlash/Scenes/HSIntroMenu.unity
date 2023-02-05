@@ -484,7 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9d73053268a2ae48bb9e7d4bf6419fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneName: HSLevel1
+  SceneName: LevelBlockout1
   SceneTransitionLoadDelay: 3
   SceneTransitionFadeCanvasGroup: {fileID: 1450247516}
 --- !u!1 &131765201

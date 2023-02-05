@@ -15,12 +15,12 @@ EditorBuildSettings:
     path: Assets/HackSlash/Scenes/HSLoseScene.unity
     guid: a6a1c5d633491894c9a7a5be74734625
   - enabled: 1
-    path: Assets/HackSlash/Scenes/HSLevel1.unity
-    guid: 25f6a38f291bfd54d9066312e1ac8afd
+    path: Assets/HackSlash/Scenes/LevelBlockout1.unity
+    guid: cb990906ca2efee4b960532e89ff8934
   - enabled: 1
-    path: Assets/HackSlash/Scenes/HSLevel2.unity
-    guid: baa3085adb3f06f4d81cb3bb654c5008
+    path: Assets/HackSlash/Scenes/LevelBlockout2.unity
+    guid: f570fabdf8452f04f8fbb2bc1b008ba2
   - enabled: 1
-    path: Assets/HackSlash/Scenes/HSLevel3.unity
-    guid: 183ccf7b7e5b00d4293cacd6e4b86cb2
+    path: Assets/HackSlash/Scenes/LevelBlockout3.unity
+    guid: c8f84971abecf1a4abf8cd1af5ce5859
   m_configObjects: {}
