@@ -247,12 +247,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EndSceneLoadDelay: 3
   EndGameFadeCanvasGroup: {fileID: 6089522275397732777}
-  WinSceneName: WinScene
+  WinSceneName: HSWinScene
   DelayBeforeFadeToBlack: 4
-  WinGameMessage: All objectives completed
+  WinGameMessage: '::SECURITY LEVEL BREACHED::'
   DelayBeforeWinMessage: 2
   VictorySound: {fileID: 8300000, guid: a533219934975884e81c1add37af9930, type: 3}
-  LoseSceneName: LoseScene
+  LoseSceneName: HSLoseScene
+  currentLevelTransitionData: {fileID: 0}
 --- !u!114 &1315839542190839938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,8 +441,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b3f67587cb43e4f98a05ddc008ad6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameManager: {fileID: 11400000, guid: 4d0f397f8e9f02e45a4754d4d9729013, type: 2}
-  playerDamage: {fileID: 0}
 --- !u!1 &2038141326299345668
 GameObject:
   m_ObjectHideFlags: 0

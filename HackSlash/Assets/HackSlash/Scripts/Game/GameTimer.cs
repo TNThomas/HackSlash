@@ -8,14 +8,17 @@ using UnityEngine;
 public class GameTimer : MonoBehaviour
 {
     //[SerializeField] private GameManagerSO gameManager;
-    public ActorsManager m_ActorsManager;
-
+    private ActorsManager m_ActorsManager;
+    private GameFlowManager m_GameFlowManager;
     private Damageable playerDamage;
 
     void Start()
     {
         m_ActorsManager = FindObjectOfType<ActorsManager>();
-        DebugUtility.HandleErrorIfNullFindObject<ActorsManager, GameTimer>(m_ActorsManager, null);
+        DebugUtility.HandleErrorIfNullFindObject<ActorsManager, GameTimer>(m_ActorsManager, this);
+
+        m_GameFlowManager = FindObjectOfType<GameFlowManager>();
+        DebugUtility.HandleErrorIfNullFindObject<GameFlowManager, GameTimer>(m_GameFlowManager, this);
 
         playerDamage = m_ActorsManager.Player.GetComponent<Damageable>();
         DebugUtility.HandleErrorIfNullGetComponent<Damageable, GameTimer>(playerDamage, this, m_ActorsManager.Player);
@@ -24,7 +27,10 @@ public class GameTimer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        playerDamage.InflictDamage(Time.deltaTime, true, null);
+        if (!m_GameFlowManager.GameIsEnding && !m_GameFlowManager.GameIsStarting)
+        {
+            playerDamage.InflictDamage(Time.deltaTime, true, null);
+        }
     }
 
 }
