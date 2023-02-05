@@ -1,4 +1,5 @@
-﻿using Unity.FPS.Game;
+﻿using System.Runtime.CompilerServices;
+using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -104,6 +105,7 @@ namespace Unity.FPS.Gameplay
         public bool IsDead { get; private set; }
         public bool IsCrouching { get; private set; }
 
+
         public float RotationMultiplier
         {
             get
@@ -123,6 +125,7 @@ namespace Unity.FPS.Gameplay
         PlayerWeaponsManager m_WeaponsManager;
         Actor m_Actor;
         Vector3 m_GroundNormal;
+        int m_GroundLayer;
         Vector3 m_CharacterVelocity;
         Vector3 m_LatestImpactSpeed;
         float m_LastTimeJumped = 0f;
@@ -200,8 +203,14 @@ namespace Unity.FPS.Gameplay
                 }
                 else
                 {
-                    // land SFX
-                    AudioSource.PlayOneShot(LandSfx);
+                    // Don't play grounding sounds on an elevator
+                    if(m_GroundLayer != LayerMask.NameToLayer("Elevator"))
+                    {
+                        Debug.Log($"GL: {m_GroundLayer}, {LayerMask.LayerToName(m_GroundLayer)}");
+
+                        // land SFX
+                        AudioSource.PlayOneShot(LandSfx);
+                    }
                 }
             }
 
@@ -229,8 +238,7 @@ namespace Unity.FPS.Gameplay
         void GroundCheck()
         {
             // Make sure that the ground check distance while already in air is very small, to prevent suddenly snapping to ground
-            float chosenGroundCheckDistance =
-                IsGrounded ? (m_Controller.skinWidth + GroundCheckDistance) : k_GroundCheckDistanceInAir;
+            float chosenGroundCheckDistance = IsGrounded ? (m_Controller.skinWidth + GroundCheckDistance) : k_GroundCheckDistanceInAir;
 
             // reset values before the ground check
             IsGrounded = false;
@@ -246,6 +254,9 @@ namespace Unity.FPS.Gameplay
                 {
                     // storing the upward direction for the surface found
                     m_GroundNormal = hit.normal;
+
+                    // Store the layer for use in fixing the elevator audio bug
+                    m_GroundLayer =  hit.transform.gameObject.layer;
 
                     // Only consider this a valid ground hit if the ground normal goes in the same direction as the character up
                     // and if the slope angle is lower than the character controller's limit
