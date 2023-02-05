@@ -98,8 +98,8 @@ namespace Unity.FPS.Gameplay
         public float FallDamageAtMaxSpeed = 50f;
 
         // adding sliding friction amount and minimum sliding speed - ashton
-        [Tooltip("Amount friction slows you down when sliding")]
-        public float SlideFriction = 0.1f;
+        [Tooltip("the sliding speed curve")]
+        public AnimationCurve SlideCurve;
         // min slide speed should be close to  MaxSpeedOnGround* MaxSpeedCrouchedRatio;
         public float MinSlideSpeed = 4f;
 
@@ -115,6 +115,8 @@ namespace Unity.FPS.Gameplay
         public bool IsSliding { get; private set; }
 
         public bool isSprinting { get; private set; }
+
+        public float SlideTime;
 
         public float RotationMultiplier
         {
@@ -334,14 +336,16 @@ namespace Unity.FPS.Gameplay
                     if (IsCrouching)
                     {
                         if (IsSliding) {
-                            // if you are sliding ignore all velocity inputs and just keep what velocity you have but subtract friction from the x and y
-                           targetVelocity = CharacterVelocity - new Vector3(Math.Sign(CharacterVelocity.x)*SlideFriction,0, Math.Sign(CharacterVelocity.y)*SlideFriction);
+                            // if you are sliding ignore all velocity inputs and just keep what velocity you have but subtract friction from the x and z
+                            targetVelocity = new Vector3(CharacterVelocity.x*SlideCurve.Evaluate(Time.time-SlideTime),0, CharacterVelocity.z*SlideCurve.Evaluate(Time.time - SlideTime)); //- new Vector3(Math.Sign(CharacterVelocity.x)*SlideFriction,0, Math.Sign(CharacterVelocity.y)*SlideFriction);
                             // if the velocity would be slower than the minimum sliding speed stop sliding
-                            if (Math.Abs(CharacterVelocity.x) < MinSlideSpeed && Math.Abs(CharacterVelocity.z) < MinSlideSpeed)
-                            {
-                                IsSliding = false ;
-                                Debug.Log("sliding stopped due to insufficent speed");
-                            }
+
+                                // change this for only walls
+                       //     if (Math.Abs(CharacterVelocity.x) < MinSlideSpeed && Math.Abs(CharacterVelocity.z) < MinSlideSpeed)
+                         //   {
+                          //      IsSliding = false ;
+                          //      Debug.Log("sliding stopped due to insufficent speed");
+                        //    }
 
                         }
                         else
@@ -491,6 +495,7 @@ namespace Unity.FPS.Gameplay
                 if (isSprinting)
                 {
                     IsSliding = crouched;
+                    SlideTime = Time.time;
                 }
                 else
                 {
