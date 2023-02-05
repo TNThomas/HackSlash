@@ -458,6 +458,14 @@ MonoBehaviour:
   MaxSpeedForFallDamage: 40
   FallDamageAtMinSpeed: 10
   FallDamageAtMaxSpeed: 30
+  SlideCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MinSlideSpeed: 4
+  SlideTime: 0
 --- !u!114 &1360575517897679518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,7 +493,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingWeapons:
-  - {fileID: 8323776800172828795, guid: b318fabc73446b746a1005cede0c4ceb, type: 3}
+  - {fileID: 8323776800172828795, guid: 3219a0693f98ff1498eeb93a303412e0, type: 3}
+  - {fileID: 8323776800172828795, guid: 90fe76173461c8d4e81d9a8c2616f0c1, type: 3}
   WeaponCamera: {fileID: 2286125971047457827}
   WeaponParentSocket: {fileID: 3891163784698469781}
   DefaultWeaponPosition: {fileID: 4354021110288562838}
@@ -495,6 +504,7 @@ MonoBehaviour:
   BobSharpness: 10
   DefaultBobAmount: 0.05
   AimingBobAmount: 0.02
+  SlidingBobAmount: 0.02
   RecoilSharpness: 50
   MaxRecoilDistance: 0.2
   RecoilRestitutionSharpness: 10
