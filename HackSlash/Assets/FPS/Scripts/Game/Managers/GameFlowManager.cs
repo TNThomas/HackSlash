@@ -27,6 +27,8 @@ namespace Unity.FPS.Game
         [Header("Lose")] [Tooltip("This string has to be the name of the scene you want to load when losing")]
         public string LoseSceneName = "LoseScene";
 
+        [Header("Level Transition")] [Tooltip("The LevelTransitionData from which to retrieve level that denotes what level to transition to.")]
+        private LevelTransitionData currentLevelTransitionData;
 
         public bool GameIsEnding { get; private set; }
         public bool GameIsStarting { get; private set; }
@@ -38,6 +40,11 @@ namespace Unity.FPS.Game
         {
             EventManager.AddListener<AllObjectivesCompletedEvent>(OnAllObjectivesCompleted);
             EventManager.AddListener<PlayerDeathEvent>(OnPlayerDeath);
+
+
+            // When we load a scene, find LevelTransitionData so we know where to go when we die
+            currentLevelTransitionData = FindObjectOfType<LevelTransitionData>();
+            DebugUtility.HandleErrorIfNullFindObject<LevelTransitionData, GameFlowManager>(currentLevelTransitionData, this);
         }
 
         void Start()
@@ -65,7 +72,7 @@ namespace Unity.FPS.Game
             }
         }
 
-        void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => EndGame(true);
+        void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => NextLevel();
         void OnPlayerDeath(PlayerDeathEvent evt) => EndGame(false);
 
         void StartGame()
@@ -77,6 +84,37 @@ namespace Unity.FPS.Game
         public void GameStarted()
         {
             GameIsStarting = false;
+        }
+
+        void NextLevel()
+        {
+            // End the game if this is the last game
+            if (currentLevelTransitionData.isLastLevel)
+            {
+                EndGame(true);
+                return;
+            }
+            else
+            {
+                // Remember that we need to load the appropriate end scene after a delay
+                GameIsEnding = true;
+                EndGameFadeCanvasGroup.gameObject.SetActive(true);
+                
+                m_SceneToLoad = currentLevelTransitionData.nextScene;
+                m_TimeLoadEndGameScene = Time.time + EndSceneLoadDelay + DelayBeforeFadeToBlack;
+
+                // play a sound on win
+                var audioSource = gameObject.AddComponent<AudioSource>();
+                audioSource.clip = VictorySound;
+                audioSource.playOnAwake = false;
+                audioSource.outputAudioMixerGroup = AudioUtility.GetAudioGroup(AudioUtility.AudioGroups.HUDVictory);
+                audioSource.PlayScheduled(AudioSettings.dspTime + DelayBeforeWinMessage);
+
+                DisplayMessageEvent displayMessage = Events.DisplayMessageEvent;
+                displayMessage.Message = WinGameMessage;
+                displayMessage.DelayBeforeDisplay = DelayBeforeWinMessage;
+                EventManager.Broadcast(displayMessage);
+            }
         }
 
         void EndGame(bool win)
