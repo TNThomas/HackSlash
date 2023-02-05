@@ -346,9 +346,14 @@ namespace Unity.FPS.Gameplay
                     if (IsCrouching)
                     {
                         if (IsSliding) {
-                            // if you are sliding ignore all velocity inputs and just keep what velocity you have but subtract friction from the x and z
-                            targetVelocity = new Vector3(CharacterVelocity.x*SlideCurve.Evaluate(Time.time-SlideTime),0, CharacterVelocity.z*SlideCurve.Evaluate(Time.time - SlideTime)); //- new Vector3(Math.Sign(CharacterVelocity.x)*SlideFriction,0, Math.Sign(CharacterVelocity.y)*SlideFriction);
-                            // if the velocity would be slower than the minimum sliding speed stop sliding
+                            // if you are sliding ignore all velocity inputs and just keep what velocity you have 
+                            targetVelocity = new Vector3(CharacterVelocity.x * SlideCurve.Evaluate(Time.time - SlideTime), CharacterVelocity.y, CharacterVelocity.z * SlideCurve.Evaluate(Time.time - SlideTime));
+                           if (CharacterVelocity.y < 0) {
+                                targetVelocity = new Vector3(CharacterVelocity.x *1.016f, CharacterVelocity.y, CharacterVelocity.z * 1.016f);
+                           }
+                            //else{
+                                 
+                            //}// if the velocity would be slower than the minimum sliding speed stop sliding
 
                                 // change this for only walls
                        //     if (Math.Abs(CharacterVelocity.x) < MinSlideSpeed && Math.Abs(CharacterVelocity.z) < MinSlideSpeed)

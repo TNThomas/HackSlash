@@ -47,8 +47,8 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Distance the weapon bobs when aiming")]
         public float AimingBobAmount = 0.02f;
 
-        //[Tooltip("Distance the weapon bobs when sliding")]
-        //public float AimingBobAmount = 0.02f;
+        [Tooltip("Distance the weapon bobs when sliding")]
+        public float SlidingBobAmount = 0.02f;
 
         [Header("Weapon Recoil")]
         [Tooltip("This will affect how fast the recoil moves the weapon, the bigger the value, the fastest")]
