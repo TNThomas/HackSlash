@@ -7,10 +7,30 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6747642523369975999, guid: 5cbda315afb30554d82fa7656b57e8d8,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7188866788534436872, guid: 5cbda315afb30554d82fa7656b57e8d8,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7835546133816945301, guid: 5cbda315afb30554d82fa7656b57e8d8,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 7886021112316619195, guid: 5cbda315afb30554d82fa7656b57e8d8,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8009310266640222169, guid: 5cbda315afb30554d82fa7656b57e8d8,
         type: 3}
       propertyPath: m_Name
-      value: ElevatorGoal 1
+      value: ElevatorGoal
       objectReference: {fileID: 0}
     - target: {fileID: 8009310266640222171, guid: 5cbda315afb30554d82fa7656b57e8d8,
         type: 3}
@@ -87,9 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a825801b77c51f418b197dda1d9b7cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Title: Race to the finish!
+  Title: '"I''M IN"'
   Description: Reach the goal to elevate user priveleges
   IsOptional: 0
   DelayVisible: 0
-  m_Animator: {fileID: 6039895017954127425, guid: 3cc4707a041531b4bbb1c4221a9ddaa1,
-    type: 3}
