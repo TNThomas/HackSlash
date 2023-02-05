@@ -249,11 +249,10 @@ MonoBehaviour:
   EndGameFadeCanvasGroup: {fileID: 6089522275397732777}
   WinSceneName: HSWinScene
   DelayBeforeFadeToBlack: 4
-  WinGameMessage: '::SECURITY LEVEL BREACHED::'
+  WinGameMessage: '::ACCESS PRIVILEGES ELEVATED::'
   DelayBeforeWinMessage: 2
   VictorySound: {fileID: 8300000, guid: a533219934975884e81c1add37af9930, type: 3}
   LoseSceneName: HSLoseScene
-  currentLevelTransitionData: {fileID: 0}
 --- !u!114 &1315839542190839938
 MonoBehaviour:
   m_ObjectHideFlags: 0
