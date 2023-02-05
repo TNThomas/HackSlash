@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using Unity.FPS.Game;
+﻿using Unity.FPS.Game;
 using UnityEngine;
 using UnityEngine.Events;
 
