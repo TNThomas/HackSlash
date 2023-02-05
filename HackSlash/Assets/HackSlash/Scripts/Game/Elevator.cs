@@ -48,7 +48,7 @@ public class Elevator : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (moveOnPlayerEntry && other.CompareTag("Player"))
         {
             CloseDoor();
 

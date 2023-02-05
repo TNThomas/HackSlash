@@ -43,7 +43,7 @@ AudioSource:
   m_GameObject: {fileID: 1617162909853205179}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: -5263005624467922201, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
+  OutputAudioMixerGroup: {fileID: 9219255887908121974, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -140,7 +140,7 @@ AudioSource:
   m_GameObject: {fileID: 1617162909853205179}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 3087063043677201651, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
+  OutputAudioMixerGroup: {fileID: 2492530341829820507, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
     type: 2}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
@@ -244,6 +244,7 @@ MonoBehaviour:
   m_PanicAudioSource: {fileID: 1617162909853205172}
   calmTrack: {fileID: 8300000, guid: ea613365d95f4264096e0154628b03aa, type: 3}
   panicTrack: {fileID: 8300000, guid: 5ec2c0363a385b840868f54aea2ee247, type: 3}
+  musicMixer: {fileID: 24100000, guid: fcc71635aab95ff4fbdf1880bf2afa2f, type: 2}
   calmSnapshot: {fileID: 24500006, guid: fcc71635aab95ff4fbdf1880bf2afa2f, type: 2}
   panicSnapshot: {fileID: 711300279654381340, guid: fcc71635aab95ff4fbdf1880bf2afa2f,
     type: 2}
