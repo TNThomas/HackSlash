@@ -15,13 +15,21 @@ public class MusicManager : MonoBehaviour
     public AudioMixerSnapshot calmSnapshot;
     public AudioMixerSnapshot panicSnapshot;
 
+    private readonly AudioMixerSnapshot[] BGMSnapshots = new AudioMixerSnapshot[2];
+    private readonly float[] snapshotBlendWeights;
+
+    public Health playerHealth;
+
     private void Awake()
     {
         if (m_CalmAudioSource == null || m_PanicAudioSource == null) Debug.LogError("One or more AudioSources are null!"); 
 
         if (calmTrack == null || panicTrack == null) Debug.LogError("One or more AudioClips are null!"); 
 
-        if (calmSnapshot == null || panicSnapshot == null) Debug.LogError("One or more AudioSnapshots are null!"); 
+        if (calmSnapshot == null || panicSnapshot == null) Debug.LogError("One or more AudioSnapshots are null!");
+
+        BGMSnapshots[0] = calmSnapshot;
+        BGMSnapshots[1] = panicSnapshot;
     }
 
     private void Start()
@@ -33,6 +41,9 @@ public class MusicManager : MonoBehaviour
         // Play tracks
         m_CalmAudioSource.Play();
         m_PanicAudioSource.Play();
+
+        playerHealth.OnDamaged += new(() => BlendBGM(playerHealth.CurrentHealth, playerHealth.MaxHealth));
+        playerHealth.OnHealed += new(() => BlendBGM(playerHealth.CurrentHealth, playerHealth.MaxHealth));
     }
 
     private void Update()
@@ -48,6 +59,13 @@ public class MusicManager : MonoBehaviour
             Debug.Log("MUSIC TRANSITION TO CALM");
             TransitionToCalm();
         }
+    }
+
+    public void BlendBGM(float faderPos, float blendThreshold = 100)
+    {
+        snapshotBlendWeights[0] = faderPos;
+        snapshotBlendWeights[1] = blendThreshold - faderPos;
+        musicMixer.TransitionToSnapshots(BGMSnapshots, snapshotBlendWeights, 0.2f);
     }
 
     public void TransitionToCalm()
