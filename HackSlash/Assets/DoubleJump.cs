@@ -19,11 +19,11 @@ public class DoubleJump : MonoBehaviour
     void Start()
     {
         m_PlayerCharacterController = GetComponent<PlayerCharacterController>();
-        DebugUtility.HandleErrorIfNullGetComponent<PlayerCharacterController, Jetpack>(m_PlayerCharacterController,
+        DebugUtility.HandleErrorIfNullGetComponent<PlayerCharacterController, DoubleJump>(m_PlayerCharacterController,
             this, gameObject);
 
         m_InputHandler = GetComponent<PlayerInputHandler>();
-        DebugUtility.HandleErrorIfNullGetComponent<PlayerInputHandler, Jetpack>(m_InputHandler, this, gameObject);
+        DebugUtility.HandleErrorIfNullGetComponent<PlayerInputHandler, DoubleJump>(m_InputHandler, this, gameObject);
     }
 
     // Update is called once per frame

@@ -122,17 +122,28 @@ namespace Unity.FPS.Gameplay
             return false;
         }
 
-        public bool GetAimInputHeld()
+        //public bool GetAimInputHeld()
+        //{
+        //    if (CanProcessInput())
+        //    {
+        //        bool isGamepad = Input.GetAxis(GameConstants.k_ButtonNameGamepadAim) != 0f;
+        //        bool i = isGamepad
+        //            ? (Input.GetAxis(GameConstants.k_ButtonNameGamepadAim) > 0f)
+        //            : Input.GetButton(GameConstants.k_ButtonNameAim);
+        //        return i;
+        //    }
+
+        //    return false;
+        //}
+
+        // hijacking aiming to turn it into dashing
+        public bool GetDashInputDown()
         {
             if (CanProcessInput())
             {
-                bool isGamepad = Input.GetAxis(GameConstants.k_ButtonNameGamepadAim) != 0f;
-                bool i = isGamepad
-                    ? (Input.GetAxis(GameConstants.k_ButtonNameGamepadAim) > 0f)
-                    : Input.GetButton(GameConstants.k_ButtonNameAim);
-                return i;
-            }
 
+                return Input.GetButtonDown(GameConstants.k_ButtonNameAim);
+            }
             return false;
         }
 

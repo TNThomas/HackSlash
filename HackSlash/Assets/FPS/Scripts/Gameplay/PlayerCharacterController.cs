@@ -121,17 +121,17 @@ namespace Unity.FPS.Gameplay
 
         // im adding a double jump now - ashton
 
-        public int MaxJumps = 2;
-        private int NumJumps = 0;
+        //public int MaxJumps = 2;
+        //private int NumJumps = 0;
 
         public float RotationMultiplier
         {
             get
             {
-                if (m_WeaponsManager.IsAiming)
-                {
-                    return AimingRotationMultiplier;
-                }
+                //if (m_WeaponsManager.IsAiming)
+                //{
+                //    return AimingRotationMultiplier;
+                //}
 
                 return 1f;
             }
@@ -212,7 +212,7 @@ namespace Unity.FPS.Gameplay
                 float fallSpeedRatio = (fallSpeed - MinSpeedForFallDamage) /
                                        (MaxSpeedForFallDamage - MinSpeedForFallDamage);
                 //set the number of jumps back to zero
-                NumJumps = 0;
+                //NumJumps = 0;
 
                 if (RecievesFallDamage && fallSpeedRatio > 0f)
                 {
@@ -409,7 +409,7 @@ namespace Unity.FPS.Gameplay
                             m_GroundNormal = Vector3.up;
 
                             // add 1 to the number of jumps that have happened
-                            NumJumps =1;
+                            //NumJumps =1;
                         }
                     }
                     
