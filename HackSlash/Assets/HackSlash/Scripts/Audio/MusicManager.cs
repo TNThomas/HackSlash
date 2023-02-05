@@ -12,13 +12,16 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private AudioClip calmTrack;
     [SerializeField] private AudioClip panicTrack;
 
+    [SerializeField] private AudioMixer musicMixer;
+
     public AudioMixerSnapshot calmSnapshot;
     public AudioMixerSnapshot panicSnapshot;
 
     private readonly AudioMixerSnapshot[] BGMSnapshots = new AudioMixerSnapshot[2];
-    private readonly float[] snapshotBlendWeights;
+    private readonly float[] snapshotBlendWeights = new float[] { 0, 0 };
 
-    public Health playerHealth;
+    private ActorsManager m_ActorsManager;
+    private Health m_PlayerHealth;
 
     private void Awake()
     {
@@ -34,6 +37,12 @@ public class MusicManager : MonoBehaviour
 
     private void Start()
     {
+        m_ActorsManager = FindObjectOfType<ActorsManager>();
+        DebugUtility.HandleErrorIfNullFindObject<ActorsManager, MusicManager>(m_ActorsManager, this);
+
+        m_PlayerHealth = m_ActorsManager.Player.GetComponent<Health>();
+        DebugUtility.HandleErrorIfNullGetComponent<Health, MusicManager>(m_PlayerHealth, this, m_ActorsManager.Player);
+
         // Set audio clips
         m_CalmAudioSource.clip = calmTrack;
         m_PanicAudioSource.clip = panicTrack;
@@ -42,8 +51,11 @@ public class MusicManager : MonoBehaviour
         m_CalmAudioSource.Play();
         m_PanicAudioSource.Play();
 
-        playerHealth.OnDamaged += new(() => BlendBGM(playerHealth.CurrentHealth, playerHealth.MaxHealth));
-        playerHealth.OnHealed += new(() => BlendBGM(playerHealth.CurrentHealth, playerHealth.MaxHealth));
+        m_PlayerHealth.OnDamaged += BlendBMGEncapsulated;
+        m_PlayerHealth.OnHealed += BlendBMGEncapsulated;
+
+        //playerHealth.OnDamaged += new(() => BlendBGM(playerHealth.CurrentHealth, playerHealth.MaxHealth));
+        //playerHealth.OnHealed += new(() => BlendBGM(playerHealth.CurrentHealth, playerHealth.MaxHealth));
     }
 
     private void Update()
@@ -59,6 +71,13 @@ public class MusicManager : MonoBehaviour
             Debug.Log("MUSIC TRANSITION TO CALM");
             TransitionToCalm();
         }
+    }
+
+    //Lmao bad Gamejam code is bad
+    void BlendBMGEncapsulated(float amount, GameObject source) => BlendBMGEncapsulated(amount);
+    void BlendBMGEncapsulated(float amount)
+    {
+        BlendBGM(m_PlayerHealth.CurrentHealth, m_PlayerHealth.MaxHealth);
     }
 
     public void BlendBGM(float faderPos, float blendThreshold = 100)
