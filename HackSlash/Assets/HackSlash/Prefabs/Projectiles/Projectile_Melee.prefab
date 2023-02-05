@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 106790115311484953}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -98,15 +98,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de99b30e1e73fd14e98cc5371da25d12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 0.5
+  Radius: 2
   Root: {fileID: 106790115311484948}
   Tip: {fileID: 106790115311484948}
-  MaxLifeTime: 0.0001
-  ImpactVfx: {fileID: 4260779743739990948, guid: bbe6bdea7cd168e428a309e9eb2e728b,
-    type: 3}
+  MaxLifeTime: 0.1
+  ImpactVfx: {fileID: 0}
   ImpactVfxLifetime: 5
   ImpactVfxSpawnOffset: 0.1
-  ImpactSfxClip: {fileID: 8300000, guid: cba089de3eef16d46baeda4077140a74, type: 3}
+  ImpactSfxClip: {fileID: 8300000, guid: e50bc0065f7759641b6aa3c0becb2c18, type: 3}
   HittableLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -129,7 +128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0244d6b9e98532469c7be0732490a61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AreaOfEffectDistance: 2.5
+  AreaOfEffectDistance: 3
   DamageRatioOverDistance:
     serializedVersion: 2
     m_Curve:
@@ -171,7 +170,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &843682582143931206
 Transform:
   m_ObjectHideFlags: 0

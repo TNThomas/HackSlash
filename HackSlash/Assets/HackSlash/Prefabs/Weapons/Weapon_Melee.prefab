@@ -25,16 +25,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2225486910712267859}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.11767159, y: -0.0135468105, z: -0.07459191, w: 0.99015456}
+  m_LocalPosition: {x: 0.072483, y: 0.31471, z: 0.18544}
+  m_LocalScale: {x: 0.83206, y: 0.83206, z: 0.83206}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1625833262181473822}
   - {fileID: 2749496858225023403}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 13.356, y: -2.614, z: -8.922}
 --- !u!114 &8323776800172828795
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -47,22 +47,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ad90ba0b1477764da373f5ec01a8cb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  WeaponName: Melee
+  WeaponName: Phish Hook
   WeaponIcon: {fileID: 21300000, guid: 2883dea87a05ddc4489db71bdbf6a412, type: 3}
   CrosshairDataDefault:
-    CrosshairSprite: {fileID: 21300000, guid: 14aa1febcf423c84997aa10d7ff64d17, type: 3}
-    CrosshairSize: 100
-    CrosshairColor: {r: 0, g: 1, b: 0.49271274, a: 0.3764706}
+    CrosshairSprite: {fileID: 21300000, guid: 2962952d6e5ae7342a298d45a3945069, type: 3}
+    CrosshairSize: 40
+    CrosshairColor: {r: 1, g: 1, b: 1, a: 0.3764706}
   CrosshairDataTargetInSight:
-    CrosshairSprite: {fileID: 21300000, guid: 14aa1febcf423c84997aa10d7ff64d17, type: 3}
-    CrosshairSize: 100
-    CrosshairColor: {r: 0, g: 1, b: 0.4226508, a: 1}
+    CrosshairSprite: {fileID: 21300000, guid: 2962952d6e5ae7342a298d45a3945069, type: 3}
+    CrosshairSize: 30
+    CrosshairColor: {r: 0.9245283, g: 0.23985407, b: 0.23985407, a: 1}
   WeaponRoot: {fileID: 5646165488041817916}
   WeaponMuzzle: {fileID: 2749496858225023403}
   ShootType: 0
   ProjectilePrefab: {fileID: 5542020336735652036, guid: 85d0bcb0883d2274084af9e2d4078c56,
     type: 3}
-  DelayBetweenShots: 0.05
+  DelayBetweenShots: 0.3
   BulletSpreadAngle: 0
   BulletsPerShot: 1
   RecoilForce: 1
@@ -70,22 +70,22 @@ MonoBehaviour:
   AimOffset: {x: 0, y: 0, z: 0}
   AutomaticReload: 1
   HasPhysicalBullets: 0
-  ClipSize: 30
+  ClipSize: 1
   ShellCasing: {fileID: 0}
   EjectionPort: {fileID: 0}
-  ShellCasingEjectionForce: 2
+  ShellCasingEjectionForce: 0
   ShellPoolSize: 1
-  AmmoReloadRate: 0.25
-  AmmoReloadDelay: 0.5
-  MaxAmmo: 10
+  AmmoReloadRate: 3
+  AmmoReloadDelay: 0
+  MaxAmmo: 1
   AutomaticReleaseOnCharged: 0
   MaxChargeDuration: 1.46
   AmmoUsedOnStartCharge: 1
   AmmoUsageRateWhileCharging: 1
-  WeaponAnimator: {fileID: 0}
+  WeaponAnimator: {fileID: 2820336111341349405}
   MuzzleFlashPrefab: {fileID: 0}
   UnparentMuzzleFlash: 0
-  ShootSfx: {fileID: 8300000, guid: 0cacf9e8e361eb24e9101b28422f7c08, type: 3}
+  ShootSfx: {fileID: 8300000, guid: 9782dddeae916154796e98bb8e1d9c75, type: 3}
   ChangeWeaponSfx: {fileID: 8300000, guid: 6f3e0904bbbace745bdef08cdbcdfec0, type: 3}
   UseContinuousShootSound: 0
   ContinuousShootStartSfx: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2990922162098195365
 Transform:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2990922162098195375}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2990922162094771079
 MeshFilter:
@@ -299,6 +299,7 @@ Transform:
   m_LocalScale: {x: 1.21104, y: 1.21104, z: 1.21104}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 5813629014991736489}
   - {fileID: 2990922162098195365}
   m_Father: {fileID: 1625833262181473822}
   m_RootOrder: 0
@@ -366,3 +367,124 @@ Transform:
   m_Father: {fileID: 2225486910712267856}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &6279303986914912578
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2990922162098195375}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.006
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.289
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.023
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.622
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.44456482
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.44456437
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.5498751
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.5498746
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 102.09
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1873578f748cea5429d9d81c56612ac2,
+        type: 3}
+      propertyPath: m_Name
+      value: Mesh_FishHook
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1873578f748cea5429d9d81c56612ac2, type: 3}
+--- !u!4 &5813629014991736489 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1873578f748cea5429d9d81c56612ac2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6279303986914912578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &6621971940276753427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 1873578f748cea5429d9d81c56612ac2,
+    type: 3}
+  m_PrefabInstance: {fileID: 6279303986914912578}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2820336111341349405
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6621971940276753427}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 37d115eb5149157469508259357721b1, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
