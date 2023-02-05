@@ -119,14 +119,19 @@ namespace Unity.FPS.Gameplay
 
         public float SlideTime;
 
+        // im adding a double jump now - ashton
+
+        //public int MaxJumps = 2;
+        //private int NumJumps = 0;
+
         public float RotationMultiplier
         {
             get
             {
-                if (m_WeaponsManager.IsAiming)
-                {
-                    return AimingRotationMultiplier;
-                }
+                //if (m_WeaponsManager.IsAiming)
+                //{
+                //    return AimingRotationMultiplier;
+                //}
 
                 return 1f;
             }
@@ -206,6 +211,9 @@ namespace Unity.FPS.Gameplay
                 float fallSpeed = -Mathf.Min(CharacterVelocity.y, m_LatestImpactSpeed.y);
                 float fallSpeedRatio = (fallSpeed - MinSpeedForFallDamage) /
                                        (MaxSpeedForFallDamage - MinSpeedForFallDamage);
+                //set the number of jumps back to zero
+                //NumJumps = 0;
+
                 if (RecievesFallDamage && fallSpeedRatio > 0f)
                 {
                     float dmgFromFall = Mathf.Lerp(FallDamageAtMinSpeed, FallDamageAtMaxSpeed, fallSpeedRatio);
@@ -399,8 +407,18 @@ namespace Unity.FPS.Gameplay
                             // Force grounding to false
                             IsGrounded = false;
                             m_GroundNormal = Vector3.up;
+
+                            // add 1 to the number of jumps that have happened
+                            //NumJumps =1;
                         }
                     }
+                    
+                    //if (m_InputHandler.GetJumpInputDown())
+                    //{
+
+                    //    Debug.Log("hi");
+
+                    //}
 
                     // footsteps sound
                     float chosenFootstepSfxFrequency =

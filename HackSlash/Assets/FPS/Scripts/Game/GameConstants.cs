@@ -15,6 +15,8 @@
         public const string k_ButtonNameSprint = "Sprint";
         public const string k_ButtonNameJump = "Jump";
         public const string k_ButtonNameCrouch = "Crouch";
+        // ashton here, adding melee 
+        public const string k_ButtonNameMelee = "Melee";
 
         public const string k_ButtonNameGamepadFire = "Gamepad Fire";
         public const string k_ButtonNameGamepadAim = "Gamepad Aim";

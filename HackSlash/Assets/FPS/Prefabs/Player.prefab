@@ -371,6 +371,8 @@ GameObject:
   - component: {fileID: 4205022973215787166}
   - component: {fileID: 1272397862697293493}
   - component: {fileID: 1661717823}
+  - component: {fileID: 30985056855989260}
+  - component: {fileID: 7871747636256407681}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -458,6 +460,14 @@ MonoBehaviour:
   MaxSpeedForFallDamage: 40
   FallDamageAtMinSpeed: 10
   FallDamageAtMaxSpeed: 30
+  SlideCurve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  MinSlideSpeed: 4
+  SlideTime: 0
 --- !u!114 &1360575517897679518
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -485,20 +495,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartingWeapons:
-  - {fileID: 8323776800172828795, guid: b318fabc73446b746a1005cede0c4ceb, type: 3}
+  - {fileID: 8323776800172828795, guid: 3219a0693f98ff1498eeb93a303412e0, type: 3}
+  - {fileID: 8323776800172828795, guid: 90fe76173461c8d4e81d9a8c2616f0c1, type: 3}
   WeaponCamera: {fileID: 2286125971047457827}
   WeaponParentSocket: {fileID: 3891163784698469781}
   DefaultWeaponPosition: {fileID: 4354021110288562838}
-  AimingWeaponPosition: {fileID: 6033319682454824337}
   DownWeaponPosition: {fileID: 2050759424792167117}
   BobFrequency: 10
   BobSharpness: 10
   DefaultBobAmount: 0.05
-  AimingBobAmount: 0.02
+  SlidingBobAmount: 0.02
   RecoilSharpness: 50
   MaxRecoilDistance: 0.2
   RecoilRestitutionSharpness: 10
-  AimingAnimationSpeed: 14
   DefaultFov: 60
   WeaponFovMultiplier: 1
   WeaponSwitchDelay: 0.2
@@ -574,7 +583,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DamageMultiplier: 1
-  SensibilityToSelfdamage: 0.25
+  SensibilityToSelfdamage: 0
 --- !u!82 &1272397862697293493
 AudioSource:
   m_ObjectHideFlags: 0
@@ -769,6 +778,34 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &30985056855989260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7253983127304857660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e585587102614b54b82b99dbf3c574f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerCamera: {fileID: 8303093099919959869}
+  DashSpeed: 50
+  DashTime: 0.2
+--- !u!114 &7871747636256407681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7253983127304857660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e06a54814b42794e8ffcd5e3a787596, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DoubleJumpForce: 9
 --- !u!1 &7383874627095517793
 GameObject:
   m_ObjectHideFlags: 0

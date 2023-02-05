@@ -25,11 +25,11 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Parent transform where all weapon will be added in the hierarchy")]
         public Transform WeaponParentSocket;
 
-        [Tooltip("Position for weapons when active but not actively aiming")]
+        [Tooltip("Position for weapons when active")]
         public Transform DefaultWeaponPosition;
 
-        [Tooltip("Position for weapons when aiming")]
-        public Transform AimingWeaponPosition;
+        //[Tooltip("Position for weapons when aiming")]
+        //public Transform AimingWeaponPosition;
 
         [Tooltip("Position for innactive weapons")]
         public Transform DownWeaponPosition;
@@ -41,13 +41,13 @@ namespace Unity.FPS.Gameplay
         [Tooltip("How fast the weapon bob is applied, the bigger value the fastest")]
         public float BobSharpness = 10f;
 
-        [Tooltip("Distance the weapon bobs when not aiming")]
+        [Tooltip("Distance the weapon bobs")]
         public float DefaultBobAmount = 0.05f;
 
-        [Tooltip("Distance the weapon bobs when aiming")]
-        public float AimingBobAmount = 0.02f;
+        //[Tooltip("Distance the weapon bobs when aiming")]
+        //public float AimingBobAmount = 0.02f;
 
-        [Tooltip("Distance the weapon bobs when sliding")]
+        [Tooltip("Distance the weapon bobs when sliding(unfinished)")]
         public float SlidingBobAmount = 0.02f;
 
         [Header("Weapon Recoil")]
@@ -60,10 +60,10 @@ namespace Unity.FPS.Gameplay
         [Tooltip("How fast the weapon goes back to it's original position after the recoil is finished")]
         public float RecoilRestitutionSharpness = 10f;
 
-        [Header("Misc")] [Tooltip("Speed at which the aiming animatoin is played")]
-        public float AimingAnimationSpeed = 10f;
+        //[Header("Misc")] [Tooltip("Speed at which the aiming animatoin is played")]
+        //public float AimingAnimationSpeed = 10f;
 
-        [Tooltip("Field of view when not aiming")]
+        [Tooltip("Field of view")]
         public float DefaultFov = 60f;
 
         [Tooltip("Portion of the regular FOV to apply to the weapon camera")]
@@ -75,7 +75,7 @@ namespace Unity.FPS.Gameplay
         [Tooltip("Layer to set FPS weapon gameObjects to")]
         public LayerMask FpsWeaponLayer;
 
-        public bool IsAiming { get; private set; }
+       // public bool IsAiming { get; private set; }
         public bool IsPointingAtEnemy { get; private set; }
         public int ActiveWeaponIndex { get; private set; }
 
@@ -134,12 +134,12 @@ namespace Unity.FPS.Gameplay
             {
                 if (!activeWeapon.AutomaticReload && m_InputHandler.GetReloadButtonDown() && activeWeapon.CurrentAmmoRatio < 1.0f)
                 {
-                    IsAiming = false;
+                    //IsAiming = false;
                     activeWeapon.StartReloadAnimation();
                     return;
                 }
                 // handle aiming down sights
-                IsAiming = m_InputHandler.GetAimInputHeld();
+                //IsAiming = m_InputHandler.GetAimInputHeld();
 
                 // handle shooting
                 bool hasFired = activeWeapon.HandleShootInputs(
@@ -156,7 +156,7 @@ namespace Unity.FPS.Gameplay
             }
 
             // weapon switch handling
-            if (!IsAiming &&
+            if (
                 (activeWeapon == null || !activeWeapon.IsCharging) &&
                 (m_WeaponSwitchState == WeaponSwitchState.Up || m_WeaponSwitchState == WeaponSwitchState.Down))
             {
@@ -196,7 +196,7 @@ namespace Unity.FPS.Gameplay
         // Update various animated features in LateUpdate because it needs to override the animated arm position
         void LateUpdate()
         {
-            UpdateWeaponAiming();
+            //UpdateWeaponAiming();
             UpdateWeaponBob();
             UpdateWeaponRecoil();
             UpdateWeaponSwitching();
@@ -284,28 +284,28 @@ namespace Unity.FPS.Gameplay
         }
 
         // Updates weapon position and camera FoV for the aiming transition
-        void UpdateWeaponAiming()
-        {
-            if (m_WeaponSwitchState == WeaponSwitchState.Up)
-            {
-                WeaponController activeWeapon = GetActiveWeapon();
-                if (IsAiming && activeWeapon)
-                {
-                    m_WeaponMainLocalPosition = Vector3.Lerp(m_WeaponMainLocalPosition,
-                        AimingWeaponPosition.localPosition + activeWeapon.AimOffset,
-                        AimingAnimationSpeed * Time.deltaTime);
-                    SetFov(Mathf.Lerp(m_PlayerCharacterController.PlayerCamera.fieldOfView,
-                        activeWeapon.AimZoomRatio * DefaultFov, AimingAnimationSpeed * Time.deltaTime));
-                }
-                else
-                {
-                    m_WeaponMainLocalPosition = Vector3.Lerp(m_WeaponMainLocalPosition,
-                        DefaultWeaponPosition.localPosition, AimingAnimationSpeed * Time.deltaTime);
-                    SetFov(Mathf.Lerp(m_PlayerCharacterController.PlayerCamera.fieldOfView, DefaultFov,
-                        AimingAnimationSpeed * Time.deltaTime));
-                }
-            }
-        }
+        //void UpdateWeaponAiming()
+        //{
+        //    if (m_WeaponSwitchState == WeaponSwitchState.Up)
+        //    {
+        //        WeaponController activeWeapon = GetActiveWeapon();
+        //        if (IsAiming && activeWeapon)
+        //        {
+        //            m_WeaponMainLocalPosition = Vector3.Lerp(m_WeaponMainLocalPosition,
+        //                AimingWeaponPosition.localPosition + activeWeapon.AimOffset,
+        //                AimingAnimationSpeed * Time.deltaTime);
+        //            SetFov(Mathf.Lerp(m_PlayerCharacterController.PlayerCamera.fieldOfView,
+        //                activeWeapon.AimZoomRatio * DefaultFov, AimingAnimationSpeed * Time.deltaTime));
+        //        }
+        //        else
+        //        {
+        //            m_WeaponMainLocalPosition = Vector3.Lerp(m_WeaponMainLocalPosition,
+        //                DefaultWeaponPosition.localPosition, AimingAnimationSpeed * Time.deltaTime);
+        //            SetFov(Mathf.Lerp(m_PlayerCharacterController.PlayerCamera.fieldOfView, DefaultFov,
+        //                AimingAnimationSpeed * Time.deltaTime));
+        //        }
+        //    }
+        //}
 
         // Updates the weapon bob animation based on character speed
         void UpdateWeaponBob()
@@ -329,7 +329,7 @@ namespace Unity.FPS.Gameplay
                     Mathf.Lerp(m_WeaponBobFactor, characterMovementFactor, BobSharpness * Time.deltaTime);
 
                 // Calculate vertical and horizontal weapon bob values based on a sine function
-                float bobAmount = IsAiming ? AimingBobAmount : DefaultBobAmount;
+                float bobAmount = /*IsAiming ? AimingBobAmount :*/ DefaultBobAmount;
                 float frequency = BobFrequency;
                 float hBobValue = Mathf.Sin(Time.time * frequency) * bobAmount * m_WeaponBobFactor;
                 float vBobValue = ((Mathf.Sin(Time.time * frequency * 2f) * 0.5f) + 0.5f) * bobAmount *

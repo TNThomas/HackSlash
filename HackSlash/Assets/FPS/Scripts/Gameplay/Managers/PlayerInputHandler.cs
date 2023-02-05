@@ -94,6 +94,17 @@ namespace Unity.FPS.Gameplay
             return false;
         }
 
+        // this is me, ashton, attempting to add melee in the same way everything else has been done
+        public bool GetMeleeInputDown()
+        {
+            if (CanProcessInput())
+            {
+                return Input.GetButtonDown(GameConstants.k_ButtonNameMelee);
+            }
+
+            return false;
+        }
+
         public bool GetFireInputDown()
         {
             return GetFireInputHeld() && !m_FireInputWasHeld;
@@ -122,17 +133,28 @@ namespace Unity.FPS.Gameplay
             return false;
         }
 
-        public bool GetAimInputHeld()
+        //public bool GetAimInputHeld()
+        //{
+        //    if (CanProcessInput())
+        //    {
+        //        bool isGamepad = Input.GetAxis(GameConstants.k_ButtonNameGamepadAim) != 0f;
+        //        bool i = isGamepad
+        //            ? (Input.GetAxis(GameConstants.k_ButtonNameGamepadAim) > 0f)
+        //            : Input.GetButton(GameConstants.k_ButtonNameAim);
+        //        return i;
+        //    }
+
+        //    return false;
+        //}
+
+        // hijacking aiming to turn it into dashing
+        public bool GetDashInputDown()
         {
             if (CanProcessInput())
             {
-                bool isGamepad = Input.GetAxis(GameConstants.k_ButtonNameGamepadAim) != 0f;
-                bool i = isGamepad
-                    ? (Input.GetAxis(GameConstants.k_ButtonNameGamepadAim) > 0f)
-                    : Input.GetButton(GameConstants.k_ButtonNameAim);
-                return i;
-            }
 
+                return Input.GetButtonDown(GameConstants.k_ButtonNameAim);
+            }
             return false;
         }
 
