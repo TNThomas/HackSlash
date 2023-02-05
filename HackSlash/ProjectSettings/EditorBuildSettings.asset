@@ -6,15 +6,21 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/FPS/Scenes/IntroMenu.unity
-    guid: 56e3faabc5bb30f49a68bb8f1292f988
+    path: Assets/HackSlash/Scenes/HSIntroMenu.unity
+    guid: e79c3f7e2082d534c90bf0352c1b0e2f
   - enabled: 1
-    path: Assets/FPS/Scenes/WinScene.unity
-    guid: 037d06fbede2b4041a843d9ee6fe750c
+    path: Assets/HackSlash/Scenes/HSWinScene.unity
+    guid: 3cf96769656068041a5d834e0063487e
   - enabled: 1
-    path: Assets/FPS/Scenes/LoseScene.unity
-    guid: 72e5c65a45893714484002914e3fd521
+    path: Assets/HackSlash/Scenes/HSLoseScene.unity
+    guid: a6a1c5d633491894c9a7a5be74734625
   - enabled: 1
-    path: Assets/FPS/Scenes/MainScene.unity
-    guid: d794a2ef8ba31d847ad3c19d03e2ddb9
+    path: Assets/HackSlash/Scenes/HSLevel1.unity
+    guid: 25f6a38f291bfd54d9066312e1ac8afd
+  - enabled: 1
+    path: Assets/HackSlash/Scenes/HSLevel2.unity
+    guid: baa3085adb3f06f4d81cb3bb654c5008
+  - enabled: 1
+    path: Assets/HackSlash/Scenes/HSLevel3.unity
+    guid: 183ccf7b7e5b00d4293cacd6e4b86cb2
   m_configObjects: {}

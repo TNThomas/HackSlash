@@ -207,6 +207,7 @@ GameObject:
   - component: {fileID: 4160549848294572208}
   - component: {fileID: 1615079986}
   - component: {fileID: 6895327427570354697}
+  - component: {fileID: 2051242299715120411}
   m_Layer: 5
   m_Name: GameManager
   m_TagString: Untagged
@@ -246,12 +247,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EndSceneLoadDelay: 3
   EndGameFadeCanvasGroup: {fileID: 6089522275397732777}
-  WinSceneName: WinScene
+  WinSceneName: HSWinScene
   DelayBeforeFadeToBlack: 4
-  WinGameMessage: All objectives completed
+  WinGameMessage: '::SECURITY LEVEL BREACHED::'
   DelayBeforeWinMessage: 2
   VictorySound: {fileID: 8300000, guid: a533219934975884e81c1add37af9930, type: 3}
-  LoseSceneName: LoseScene
+  LoseSceneName: HSLoseScene
+  currentLevelTransitionData: {fileID: 0}
 --- !u!114 &1315839542190839938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -427,6 +429,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SwitchOrder: 0
   Replacements: []
+--- !u!114 &2051242299715120411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315839542190839943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77b3f67587cb43e4f98a05ddc008ad6f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2038141326299345668
 GameObject:
   m_ObjectHideFlags: 0
