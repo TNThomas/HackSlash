@@ -29,6 +29,7 @@ namespace Unity.FPS.Game
 
 
         public bool GameIsEnding { get; private set; }
+        public bool GameIsStarting { get; private set; }
 
         float m_TimeLoadEndGameScene;
         string m_SceneToLoad;
@@ -42,6 +43,8 @@ namespace Unity.FPS.Game
         void Start()
         {
             AudioUtility.SetMasterVolume(1);
+
+            StartGame();
         }
 
         void Update()
@@ -64,6 +67,17 @@ namespace Unity.FPS.Game
 
         void OnAllObjectivesCompleted(AllObjectivesCompletedEvent evt) => EndGame(true);
         void OnPlayerDeath(PlayerDeathEvent evt) => EndGame(false);
+
+        void StartGame()
+        {
+            GameIsStarting = true;
+        }
+
+        // Called by the startElevator to start the game
+        public void GameStarted()
+        {
+            GameIsStarting = false;
+        }
 
         void EndGame(bool win)
         {

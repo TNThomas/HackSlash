@@ -406,7 +406,7 @@ namespace Unity.FPS.AI
 
         public bool TryAtack(Vector3 enemyPosition)
         {
-            if (m_GameFlowManager.GameIsEnding)
+            if (m_GameFlowManager.GameIsEnding || m_GameFlowManager.GameIsStarting)
                 return false;
 
             OrientWeaponsTowards(enemyPosition);
